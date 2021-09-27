@@ -20,7 +20,7 @@ class ShippingCostCalculator
     {
         $this->price_factory = new PriceFactory();
     }
-    public function calculate(ICountryShippingCalc $calc, IShippingClient $client):IPrice
+    public function calculate(ICountryShippingCalc $calc, IShippingClient $client, IShippingOrder $order):IPrice
     {
         //all future additional calculations related with shipping only should start/be added here
         $shipping_cost = $calc->calculate();
@@ -38,9 +38,21 @@ class ShippingCostCalculator
         }
 
         //include additional money for premium type box
+        if($order->isPremiumBox() )
+        {
+            $price = 0;
+            switch($shipping_cost->getCurrencyCode())
+            {
+                case "PLN" : $price = 40; break;//PLN;
+                case "GBP": $price = 20; break; //GBP
+                case "$": $price = 17; break;//US $
+                default: 17; break; // US $ for the rest of the world
+            }
+            $price_summary = $shipping_cost->getValue() + $price;
+            $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $price_summary);
+        }
 
         //include discounts for special premium days of delivery
-
         return $shipping_cost;
     }
 }

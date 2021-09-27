@@ -50,4 +50,9 @@ class ShippingOrderAdapter implements IShippingOrder, IShippingClient
                return $this->order->getClientShippingDiscountWORLD();
        }
     }
+
+    public function isPremiumBox():bool
+    {
+        return $this->order->isPremiumBox();
+    }
 }

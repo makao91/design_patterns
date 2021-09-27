@@ -23,7 +23,7 @@ class MainTest extends TestCase
     /**
      * @feature Orders
      * @sceanrio Calculate Shipping Cost
-     * @case to Poland without Client Shipping discount
+     * @case to Poland with Client Shipping discount
      * @test
      */
     public function start_needToPayPLDiscount()
@@ -32,6 +32,20 @@ class MainTest extends TestCase
         $result = $main->start("PL", 50, 10);
 
         $this->assertEquals('15PLN', $result);
+    }
+
+    /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to Poland without Client Shipping discount and premium box
+     * @test
+     */
+    public function start_needToPayPLDiscountANDPremiumBox()
+    {
+        $main  = new Main();
+        $result = $main->start("PL", 50, 10, true);
+
+        $this->assertEquals('55PLN', $result);
     }
 
     /**
