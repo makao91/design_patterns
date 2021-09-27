@@ -49,4 +49,15 @@ class MainTest extends TestCase
 
         $this->assertEquals('$0', $result);
     }
+
+    /**
+     * @test
+     */
+    public function start_costForUnknowCountries()
+    {
+        $main  = new Main();
+        $result = $main->start("Nigeria", 2450);
+
+        $this->assertEquals('$200', $result);
+    }
 }
