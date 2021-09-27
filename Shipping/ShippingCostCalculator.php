@@ -27,6 +27,7 @@ class ShippingCostCalculator
 
         //include discounts for special premium days of delivery
         //IMPORTANT this has to be called before all other discounts calculations
+        //e.g. Free delivery in special day is not equal that the premium box is free ;)
         if($this->isSpecialDay())
         {
             $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), 0);
