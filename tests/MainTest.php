@@ -29,7 +29,7 @@ class MainTest extends TestCase
     public function start_needToPayPLDiscount()
     {
         $main  = new Main();
-        $result = $main->start("PL", 50);
+        $result = $main->start("PL", 50, 10);
 
         $this->assertEquals('15PLN', $result);
     }

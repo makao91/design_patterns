@@ -38,6 +38,16 @@ class ShippingOrderAdapter implements IShippingOrder, IShippingClient
 
     public function getShippingDiscount()
     {
-        // TODO: Implement getShippingDiscount() method.
+       switch($this->order->getCountry())
+       {
+           case "PL":
+               return $this->order->getClientShippingDiscountPL();
+           case "UK":
+               return $this->order->getClientShippingDiscountEU();
+           case "US":
+               return $this->order->getClientShippingDiscountWORLD();
+           default:
+               return $this->order->getClientShippingDiscountWORLD();
+       }
     }
 }

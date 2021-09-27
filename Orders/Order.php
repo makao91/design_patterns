@@ -17,7 +17,7 @@ class Order
     private $total = 50;
     private $shipping_discount = 0;
 
-    public function __construct($country_code, $total, $shipping_discount = 0)
+    public function __construct($country_code, $total, $shipping_discount)
     {
         $this->country = $country_code;
         $this->total = $total;
@@ -50,7 +50,7 @@ class Order
 
     public function getClientShippingDiscountPL()
     {
-        return 10;
+        return $this->shipping_discount;
     }
 
     public function getClientShippingDiscountEU()

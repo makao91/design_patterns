@@ -9,9 +9,9 @@ use App\Contracts\IPrice;
 
 class Main
 {
-    public function start($country_code, $total)
+    public function start($country_code, $total, $discount = 0)
     {
-        $immutable_order = new Order($country_code, $total);
+        $immutable_order = new Order($country_code, $total, $discount);
 
         //we want to be independent as much as possible from the oryginal messed Order object
         $order_adapter = new ShippingOrderAdapter($immutable_order);
