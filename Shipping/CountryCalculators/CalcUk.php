@@ -8,17 +8,9 @@ use App\Shipping\Price\PriceUk;
 
 class CalcUk implements ICountryShippingCalc
 {
-
-    private IShippingOrder $order;
-
-    public function __construct(IShippingOrder $order)
+    public function calculate(IShippingOrder $order):IPrice
     {
-        $this->order = $order;
-    }
-
-    public function calculate():IPrice
-    {
-        $total = $this->order->getTotalUk();
+        $total = $order->getTotalUk();
 
         if($total > 300)
         {

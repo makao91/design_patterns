@@ -8,17 +8,9 @@ use App\Shipping\Price\PriceUs;
 
 class CalcUs implements ICountryShippingCalc
 {
-
-    private IShippingOrder $order;
-
-    public function __construct(IShippingOrder $order)
+    public function calculate(IShippingOrder $order):IPrice
     {
-        $this->order = $order;
-    }
-
-    public function calculate():IPrice
-    {
-        $total = $this->order->getTotalUs();
+        $total = $order->getTotalUs();
 
         if($total > 1000)
         {

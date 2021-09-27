@@ -7,11 +7,15 @@ use App\Contracts\IShippingOrder;
 use App\Contracts\IShippingClient;
 
 use App\Orders\Order;
+use App\Shipping\AdditionalCalculations\ClientShippingDiscount;
+use App\Shipping\AdditionalCalculations\FreeDeliveryDays;
+use App\Shipping\AdditionalCalculations\PremiumBox;
 use App\Shipping\CountryCalculators\CountryCalcFactory;
-use App\Shipping\Price\PriceFactory;
+
 use App\Shipping\Price\PricePl;
 use App\Shipping\Price\PriceUk;
 use App\Shipping\Price\PriceUs;
+use App\Shipping\Price\PriceFactory;
 
 class ShippingCostCalculator
 {
@@ -20,51 +24,21 @@ class ShippingCostCalculator
     {
         $this->price_factory = new PriceFactory();
     }
-    public function calculate(ICountryShippingCalc $calc, IShippingClient $client, IShippingOrder $order):IPrice
+    public function calculate(ICountryShippingCalc $country_calc, IShippingClient $order):IPrice
     {
         //all future additional calculations related with shipping only should start/be added here
-        $shipping_cost = $calc->calculate();
+       // $shipping_cost = $country_calc->calculate($order);
 
         //include discounts for special premium days of delivery
         //IMPORTANT this has to be called before all other discounts calculations
         //e.g. Free delivery in special day is not equal that the premium box is free ;)
-        if($this->isSpecialDay())
-        {
-            $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), 0);
-        }
+        $with_free_days = new FreeDeliveryDays($country_calc);
 
-        //include client discount code
-        if($client->getShippingDiscount() > 0 )
-        {
-            if($client->getShippingDiscount() >= $shipping_cost->getValue())
-            {
-                $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), 0);
-            } else {
-                $after_discount = $shipping_cost->getValue() - $client->getShippingDiscount();
-                $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $after_discount);
-            }
-        }
+        $with_client_discount = new ClientShippingDiscount($with_free_days);
+        $with_premium_boxing = new PremiumBox($with_client_discount);
 
-        //include additional money for premium type box
-        if($order->isPremiumBox() )
-        {
-            $price = 0;
-            switch($shipping_cost->getCurrencyCode())
-            {
-                case "PLN" : $price = 40; break;//PLN;
-                case "GBP": $price = 20; break; //GBP
-                case "$": $price = 17; break;//US $
-                default: 17; break; // US $ for the rest of the world
-            }
-            $price_summary = $shipping_cost->getValue() + $price;
-            $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $price_summary);
-        }
-
-        return $shipping_cost;
+        return $with_premium_boxing->calculate($order);
     }
 
-    private function isSpecialDay()
-    {
-        return false;
-    }
+
 }

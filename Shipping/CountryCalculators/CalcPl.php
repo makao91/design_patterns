@@ -8,16 +8,9 @@ use App\Shipping\Price\PricePl;
 
 class CalcPl implements ICountryShippingCalc
 {
-    private IShippingOrder $order;
-
-    public function __construct(IShippingOrder $order)
+    public function calculate(IShippingOrder $order):IPrice
     {
-        $this->order = $order;
-    }
-
-    public function calculate():IPrice
-    {
-        $total = $this->order->getTotalPl();
+        $total = $order->getTotalPl();
         if($total > 100)
         {
             return new PricePl(0);

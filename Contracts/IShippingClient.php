@@ -1,7 +1,7 @@
 <?php
 namespace App\Contracts;
 
-interface IShippingClient
+interface IShippingClient extends IShippingOrder
 {
     public function getShippingDiscount();
 }
