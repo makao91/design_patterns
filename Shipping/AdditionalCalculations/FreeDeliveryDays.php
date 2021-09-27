@@ -23,7 +23,11 @@ class FreeDeliveryDays implements \App\Contracts\ICountryShippingCalc
     public function calculate(IShippingOrder $order): IPrice
     {
         $shipping_cost = $this->calc->calculate($order);
+        return $this->decorate($shipping_cost, $order);
+    }
 
+    protected function decorate(IPrice $shipping_cost, IShippingOrder $order)
+    {
         if($this->isSpecialDay())
         {
             $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), 0);

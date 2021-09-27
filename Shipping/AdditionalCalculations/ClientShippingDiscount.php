@@ -20,7 +20,11 @@ class ClientShippingDiscount implements ICountryShippingCalc
     public function calculate(IShippingOrder $order): IPrice
     {
         $shipping_cost = $this->calc->calculate($order);
+        return $this->decorate($shipping_cost, $order);
+    }
 
+    protected function decorate(IPrice $shipping_cost, IShippingOrder $order)
+    {
         if($order->getShippingDiscount() > 0 )
         {
             if($order->getShippingDiscount() >= $shipping_cost->getValue())

@@ -3,13 +3,12 @@
 
 namespace App\Shipping\AdditionalCalculations;
 
-
-use App\Contracts\ICountryShippingCalc;
+use \App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceFactory;
 
-class PremiumBox implements \App\Contracts\ICountryShippingCalc
+class PremiumBox implements ICountryShippingCalc
 {
 
     private ICountryShippingCalc $calc;
@@ -24,7 +23,11 @@ class PremiumBox implements \App\Contracts\ICountryShippingCalc
     public function calculate(IShippingOrder $order): IPrice
     {
         $shipping_cost = $this->calc->calculate($order);
+        return $this->decorate($shipping_cost, $order);
+    }
 
+    protected function decorate(IPrice $shipping_cost, IShippingOrder $order)
+    {
         if($order->isPremiumBox() )
         {
             $price = 0;
