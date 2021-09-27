@@ -9,24 +9,9 @@ use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceFactory;
 
-class FreeDeliveryDays implements \App\Contracts\ICountryShippingCalc
+class FreeDeliveryDays extends IAdditionalCalc
 {
-    private ICountryShippingCalc $calc;
-    private $price_factory ;
-
-    public function __construct(ICountryShippingCalc $calc)
-    {
-        $this->calc = $calc;
-        $this->price_factory = new PriceFactory();
-    }
-
-    public function calculate(IShippingOrder $order): IPrice
-    {
-        $shipping_cost = $this->calc->calculate($order);
-        return $this->decorate($shipping_cost, $order);
-    }
-
-    protected function decorate(IPrice $shipping_cost, IShippingOrder $order)
+    protected function decorate(IPrice $shipping_cost, IShippingOrder $order):IPrice
     {
         if($this->isSpecialDay())
         {
