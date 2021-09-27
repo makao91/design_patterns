@@ -3,5 +3,6 @@ namespace App\Contracts;
 
 interface ICountryShippingCalc
 {
-    public function calculate($order):IPrice;
+    public function __construct(IShippingOrder $order);
+    public function calculate():IPrice;
 }

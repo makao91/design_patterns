@@ -11,23 +11,9 @@ use App\Shipping\Price\PriceUs;
 
 class ShippingCostCalculator
 {
-    public function calculate(Order $order):IPrice
+    public function calculate(ICountryShippingCalc $calc):IPrice
     {
-        $country = $order->getCountry();
-
-        $country_calculator = (new CountryCalcFactory())->create($country);
-        return $this->country_calc($country_calculator);
-    }
-
-    /**
-     * We use this method to force future programmers to use the proper interface
-     * implementation for calculation purphoses
-     * @param Order $order
-     * @param ICountryShippingCalc $calc
-     * @return IPrice
-     */
-    private function country_calc(Order $order, ICountryShippingCalc $calc):IPrice
-    {
-        return $calc->calculate($order);
+        //all future additional calculations related with shipping only should start/be added here
+        return $calc->calculate();
     }
 }

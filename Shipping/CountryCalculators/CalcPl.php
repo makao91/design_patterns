@@ -3,13 +3,21 @@ namespace App\Shipping\CountryCalculators;
 
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
+use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PricePl;
 
 class CalcPl implements ICountryShippingCalc
 {
-    public function calculate($order):IPrice
+    private IShippingOrder $order;
+
+    public function __construct(IShippingOrder $order)
     {
-        $total = $order->getTotalPl();
+        $this->order = $order;
+    }
+
+    public function calculate():IPrice
+    {
+        $total = $this->order->getTotalPl();
         if($total > 100)
         {
             return new PricePl(0);

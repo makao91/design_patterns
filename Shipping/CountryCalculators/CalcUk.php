@@ -1,15 +1,24 @@
 <?php
 namespace App\Shipping\CountryCalculators;
 
+use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
+use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceUk;
 
-class CalcUk implements \App\Contracts\ICountryShippingCalc
+class CalcUk implements ICountryShippingCalc
 {
 
-    public function calculate($order):IPrice
+    private IShippingOrder $order;
+
+    public function __construct(IShippingOrder $order)
     {
-        $total = $order->getTotalUk();
+        $this->order = $order;
+    }
+
+    public function calculate():IPrice
+    {
+        $total = $this->order->getTotalUk();
 
         if($total > 300)
         {
