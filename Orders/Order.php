@@ -15,11 +15,13 @@ class Order
 {
     private $country = "PL";
     private $total = 50;
+    private $shipping_discount = 0;
 
-    public function __construct($country_code, $total)
+    public function __construct($country_code, $total, $shipping_discount = 0)
     {
         $this->country = $country_code;
         $this->total = $total;
+        $this->shipping_discount = $shipping_discount;
     }
 
     public function getCountry()

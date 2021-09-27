@@ -7,6 +7,9 @@ use App\Main;
 class MainTest extends TestCase
 {
     /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to Poland without discounts
      * @test
      */
     public function start_needToPayPL()
@@ -15,6 +18,20 @@ class MainTest extends TestCase
         $result = $main->start("PL", 50);
 
         $this->assertEquals('25PLN', $result);
+    }
+
+    /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to Poland without Client Shipping discount
+     * @test
+     */
+    public function start_needToPayPLDiscount()
+    {
+        $main  = new Main();
+        $result = $main->start("PL", 50);
+
+        $this->assertEquals('15PLN', $result);
     }
 
     /**

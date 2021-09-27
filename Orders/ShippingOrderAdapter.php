@@ -4,7 +4,10 @@
 namespace App\Orders;
 
 
-class ShippingOrderAdapter implements \App\Contracts\IShippingOrder
+use App\Contracts\IShippingClient;
+use App\Contracts\IShippingOrder;
+
+class ShippingOrderAdapter implements IShippingOrder, IShippingClient
 {
     private Order $order;
 
@@ -31,5 +34,10 @@ class ShippingOrderAdapter implements \App\Contracts\IShippingOrder
     public function getTotalUs()
     {
         return $this->order->getTotalUs();
+    }
+
+    public function getShippingDiscount()
+    {
+        // TODO: Implement getShippingDiscount() method.
     }
 }
