@@ -25,6 +25,13 @@ class ShippingCostCalculator
         //all future additional calculations related with shipping only should start/be added here
         $shipping_cost = $calc->calculate();
 
+        //include discounts for special premium days of delivery
+        //IMPORTANT this has to be called before all other discounts calculations
+        if($this->isSpecialDay())
+        {
+            $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), 0);
+        }
+
         //include client discount code
         if($client->getShippingDiscount() > 0 )
         {
@@ -52,7 +59,11 @@ class ShippingCostCalculator
             $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $price_summary);
         }
 
-        //include discounts for special premium days of delivery
         return $shipping_cost;
+    }
+
+    private function isSpecialDay()
+    {
+        return false;
     }
 }
