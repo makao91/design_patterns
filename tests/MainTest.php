@@ -101,6 +101,6 @@ class MainTest extends TestCase
         $main  = new Main();
         $result = $main->start("Nigeria", 2450);
 
-        $this->assertEquals('$299', $result);
+        $this->assertEquals('ETH299', $result);
     }
 }

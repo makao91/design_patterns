@@ -4,7 +4,6 @@ namespace App\Shipping\Countries\Us;
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
-use App\Shipping\Price\PriceUs;
 
 class OrderTotalUs implements ICountryShippingCalc
 {

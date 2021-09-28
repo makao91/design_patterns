@@ -1,12 +1,12 @@
 <?php
-namespace App\Shipping\Price;
+namespace App\Shipping\Countries\Us;
 
 use App\Contracts\IPrice;
 
-class PriceUk implements IPrice
+class PriceUs implements IPrice
 {
     private $value = 0;
-    private $currency_code = 'GBP';
+    private $currency_code = '$';
 
     public function __construct(float $value)
     {
@@ -25,6 +25,6 @@ class PriceUk implements IPrice
 
     public function getFomatedValue()
     {
-        return $this->value.$this->currency_code;
+        return $this->currency_code.$this->value;
     }
 }

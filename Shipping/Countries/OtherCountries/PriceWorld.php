@@ -1,12 +1,12 @@
 <?php
-namespace App\Shipping\Price;
+namespace App\Shipping\Countries\OtherCountries;
 
 use App\Contracts\IPrice;
 
-class PriceUs implements IPrice
+class PriceWorld implements IPrice
 {
     private $value = 0;
-    private $currency_code = '$';
+    private $currency_code = 'ETH';
 
     public function __construct(float $value)
     {

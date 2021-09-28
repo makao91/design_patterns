@@ -2,7 +2,10 @@
 namespace App\Shipping\Price;
 
 use App\Contracts\IPrice;
+use App\Shipping\Countries\OtherCountries\PriceWorld;
 use App\Shipping\Countries\Pl\PricePl;
+use App\Shipping\Countries\Uk\PriceUk;
+use App\Shipping\Countries\Us\PriceUs;
 
 class PriceFactory
 {
@@ -17,7 +20,7 @@ class PriceFactory
             case "$":
                 return new PriceUs($value);
             default:
-                return new PriceUs($value);
+                return new PriceWorld($value);
         }
     }
 }
