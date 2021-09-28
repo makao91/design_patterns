@@ -49,6 +49,9 @@ class MainTest extends TestCase
     }
 
     /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to Poland free delivery above order total
      * @test
      */
     public function start_freeShippingPL()
@@ -60,6 +63,9 @@ class MainTest extends TestCase
     }
 
     /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to England free delivery above order total
      * @test
      */
     public function start_freeShippingUK()
@@ -71,6 +77,9 @@ class MainTest extends TestCase
     }
 
     /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to US free delivery above order total
      * @test
      */
     public function start_freeShippingUs()
@@ -82,6 +91,9 @@ class MainTest extends TestCase
     }
 
     /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to other countries - const delivery price in $
      * @test
      */
     public function start_costForUnknowCountries()

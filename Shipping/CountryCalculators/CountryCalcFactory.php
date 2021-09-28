@@ -8,9 +8,8 @@ use App\Contracts\IShippingOrder;
 
 class CountryCalcFactory
 {
-    public function create(IShippingOrder $order): ICountryShippingCalc
+    public function create($country_code): ICountryShippingCalc
     {
-        $country_code = $order->getCountry();
         switch ($country_code)
         {
             case "PL":

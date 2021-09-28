@@ -13,11 +13,12 @@ use App\Shipping\Price\PriceFactory;
 
 class ShippingCostCalculator
 {
-    private $price_factory ;
-    public function __construct()
-    {
-        $this->price_factory = new PriceFactory();
-    }
+    /**
+     * Use country calculator and decorate it with additional calculations
+     * @param ICountryShippingCalc $country_calc
+     * @param IShippingOrder $order
+     * @return IPrice
+     */
     public function calculate(ICountryShippingCalc $country_calc, IShippingOrder $order):IPrice
     {
         //include discounts for special premium days of delivery
