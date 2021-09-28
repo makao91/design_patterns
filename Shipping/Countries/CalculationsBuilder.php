@@ -3,11 +3,11 @@ namespace App\Shipping\Countries;
 
 use App\Contracts\ICalculationsBuilder;
 use App\Contracts\ICountryShippingCalc;
+use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\CommonCalculations\ClientShippingDiscount;
 use App\Shipping\CommonCalculations\FreeDeliveryDays;
-use App\Shipping\Countries\Pl\BoxPricing\PremiumBoxPl;
-use App\Shipping\Countries\Us\BoxPricing\PremiumBoxUs;
+
 
 abstract class CalculationsBuilder implements ICalculationsBuilder
 {
@@ -18,20 +18,15 @@ abstract class CalculationsBuilder implements ICalculationsBuilder
         $this->order = $order;
     }
 
-    public function useShippingDiscounts(ICountryShippingCalc $calculations_component)
+    public function useShippingDiscounts(IPrice $price): IPrice
     {
-        $with_free_days = new FreeDeliveryDays($calculations_component);
-        return new ClientShippingDiscount($with_free_days);
+        $with_free_days = (new FreeDeliveryDays($price))->calculate($this->order);
+        return (new ClientShippingDiscount($with_free_days))->calculate($this->order);
     }
 
-    public function makeCalculations(ICountryShippingCalc $calculations_component): \App\Contracts\IPrice
-    {
-        return $calculations_component->calculate($this->order);
-    }
+    abstract public function useOrderTotal():IPrice;
 
-    abstract public function useOrderTotal():ICountryShippingCalc;
-
-    abstract public function useBoxPricing(ICountryShippingCalc $calculations_component);
+    abstract public function useBoxPricing(IPrice $price):IPrice;
 
 
 }

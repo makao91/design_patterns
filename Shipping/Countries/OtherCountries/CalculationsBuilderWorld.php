@@ -2,19 +2,20 @@
 namespace App\Shipping\Countries\OtherCountries;
 
 use App\Contracts\ICountryShippingCalc;
+use App\Contracts\IPrice;
 use App\Shipping\Countries\CalculationsBuilder;
 use App\Shipping\Countries\OtherCountries\BoxPricing\PremiumBoxWorld;
 
 
 class CalculationsBuilderWorld extends CalculationsBuilder
 {
-    public function useOrderTotal():ICountryShippingCalc
+    public function useOrderTotal():IPrice
     {
-        return new OrderTotalWorld();
+        return (new OrderTotalWorld())->calculate($this->order);
     }
 
-    public function useBoxPricing(ICountryShippingCalc $calculations_component)
+    public function useBoxPricing(IPrice $price):IPrice
     {
-        return new PremiumBoxWorld($calculations_component);
+        return (new PremiumBoxWorld($price))->calculate($this->order);
     }
 }

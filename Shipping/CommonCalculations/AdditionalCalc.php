@@ -11,19 +11,18 @@ use App\Shipping\PriceFactory;
 abstract class AdditionalCalc implements ICountryShippingCalc
 {
 
-    protected ICountryShippingCalc $calc;
+    protected IPrice $price;
     protected $price_factory ;
 
-    public function __construct(ICountryShippingCalc $calc)
+    public function __construct(IPrice $price)
     {
-        $this->calc = $calc;
+        $this->price = $price;
         $this->price_factory = new PriceFactory();
     }
 
     public function calculate(IShippingOrder $order): IPrice
     {
-        $shipping_cost = $this->calc->calculate($order);
-        return $this->decorate($shipping_cost, $order);
+        return $this->decorate($this->price, $order);
     }
 
     abstract protected function decorate(IPrice $shipping_cost, IShippingOrder $order): IPrice;

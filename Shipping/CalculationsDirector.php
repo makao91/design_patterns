@@ -26,9 +26,6 @@ class CalculationsDirector implements ICalculate
         $decorate = $this->calc_builder->useShippingDiscounts($calculator);
 
         //other calculations
-        $decorate = $this->calc_builder->useBoxPricing($decorate);
-
-        //get calculations chain result
-        return $this->calc_builder->makeCalculations($decorate);
+        return $this->calc_builder->useBoxPricing($decorate);
     }
 }
