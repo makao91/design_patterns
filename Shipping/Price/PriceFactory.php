@@ -2,6 +2,7 @@
 namespace App\Shipping\Price;
 
 use App\Contracts\IPrice;
+use App\Shipping\Countries\Pl\PricePl;
 
 class PriceFactory
 {

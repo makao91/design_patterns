@@ -1,5 +1,5 @@
 <?php
-namespace App\Shipping\CountryCalculators;
+namespace App\Shipping\Countries\Us;
 
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;

@@ -1,10 +1,9 @@
 <?php
-namespace App\Shipping\CountryCalculators;
+namespace App\Shipping\Countries\Pl;
 
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
-use App\Shipping\Price\PricePl;
 
 class OrderTotalPl implements ICountryShippingCalc
 {

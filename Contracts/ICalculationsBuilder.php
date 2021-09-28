@@ -3,8 +3,8 @@ namespace App\Contracts;
 
 interface ICalculationsBuilder
 {
-    public function useOrderTotal();
-    public function useShippingDiscounts();
-    public function useBoxPricing();
-    public function makeCalculations():IPrice;
+    public function useOrderTotal():ICountryShippingCalc;
+    public function useShippingDiscounts(ICountryShippingCalc $calculations_component);
+    public function useBoxPricing(ICountryShippingCalc $calculations_component);
+    public function makeCalculations(ICountryShippingCalc $calculations_component):IPrice;
 }
