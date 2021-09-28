@@ -18,7 +18,7 @@ class ShippingCostCalculator
     {
         $this->price_factory = new PriceFactory();
     }
-    public function calculate(ICountryShippingCalc $country_calc, IShippingClient $order):IPrice
+    public function calculate(ICountryShippingCalc $country_calc, IShippingOrder $order):IPrice
     {
         //include discounts for special premium days of delivery
         //IMPORTANT this has to be called before all other discounts calculations
@@ -30,6 +30,5 @@ class ShippingCostCalculator
 
         return $with_premium_boxing->calculate($order);
     }
-
 
 }

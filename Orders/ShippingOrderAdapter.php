@@ -7,7 +7,7 @@ namespace App\Orders;
 use App\Contracts\IShippingClient;
 use App\Contracts\IShippingOrder;
 
-class ShippingOrderAdapter implements IShippingOrder, IShippingClient
+class ShippingOrderAdapter implements IShippingOrder
 {
     private Order $order;
 

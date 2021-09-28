@@ -8,7 +8,7 @@ use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceFactory;
 
-class PremiumBox extends IAdditionalCalc
+class PremiumBox extends AdditionalCalc
 {
 
     protected function decorate(IPrice $shipping_cost, IShippingOrder $order):IPrice

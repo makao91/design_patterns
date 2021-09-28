@@ -1,9 +1,11 @@
 <?php
 namespace App\Shipping\Price;
 
+use App\Contracts\IPrice;
+
 class PriceFactory
 {
-    public function create($country_code, float $value)
+    public function create($country_code, float $value):IPrice
     {
         switch ($country_code)
         {

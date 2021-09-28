@@ -8,7 +8,7 @@ use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceFactory;
 
-abstract class IAdditionalCalc implements ICountryShippingCalc
+abstract class AdditionalCalc implements ICountryShippingCalc
 {
 
     protected ICountryShippingCalc $calc;

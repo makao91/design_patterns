@@ -19,7 +19,7 @@ class Main
         $country_calculator = (new CountryCalcFactory())->create($order_adapter);
 
         /*@var IPrice */
-        $shipping_cost = (new ShippingCostCalculator())->calculate($country_calculator, $order_adapter, $order_adapter);
+        $shipping_cost = (new ShippingCostCalculator())->calculate($country_calculator, $order_adapter);
 
         return $shipping_cost->getFomatedValue();
     }

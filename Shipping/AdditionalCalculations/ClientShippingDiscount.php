@@ -6,7 +6,7 @@ use \App\Contracts\IShippingOrder;
 use \App\Contracts\IPrice;
 use \App\Shipping\Price\PriceFactory;
 
-class ClientShippingDiscount extends IAdditionalCalc
+class ClientShippingDiscount extends AdditionalCalc
 {
     protected function decorate(IPrice $shipping_cost, IShippingOrder $order):IPrice
     {

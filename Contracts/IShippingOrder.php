@@ -7,5 +7,5 @@ interface IShippingOrder
     public function getTotalPl();
     public function getTotalUk();
     public function getTotalUs();
-
+    public function getShippingDiscount();
 }
