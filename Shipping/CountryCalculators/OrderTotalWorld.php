@@ -8,7 +8,7 @@ use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Price\PriceUs;
 
-class CalcWorld implements ICountryShippingCalc
+class OrderTotalWorld implements ICountryShippingCalc
 {
     public function calculate(IShippingOrder $order): IPrice
     {

@@ -4,19 +4,18 @@ namespace App\Shipping\CountryCalculators;
 use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
-use App\Shipping\Price\PriceUk;
+use App\Shipping\Price\PricePl;
 
-class CalcUk implements ICountryShippingCalc
+class OrderTotalPl implements ICountryShippingCalc
 {
     public function calculate(IShippingOrder $order):IPrice
     {
-        $total = $order->getTotalUk();
-
-        if($total > 300)
+        $total = $order->getTotalPl();
+        if($total > 100)
         {
-            return new PriceUk(0);
+            return new PricePl(0);
         }
         //there will be more logic in the future
-        return  new PriceUk(25);
+        return new PricePl(25);
     }
 }

@@ -18,12 +18,13 @@ class Main
         return $shipping_cost->getFomatedValue();
     }
 
+    /**
+     * we want to be independent as much as possible from the original messed Order object
+     */
     private function getWrappedOrder($country_code, $total, $discount = 0, $premium_box = false):IShippingOrder
     {
         $immutable_order = new Order($country_code, $total, $discount, $premium_box);
 
-        //we want to be independent as much as possible from the oryginal messed Order object
-        /*@var IShippingOrder $order_adapter */
         return new ShippingOrderAdapter($immutable_order);
     }
 

@@ -13,13 +13,13 @@ class CountryCalcFactory
         switch ($country_code)
         {
             case "PL":
-                return new CalcPl();
+                return new OrderTotalPl();
             case "UK":
-                return new CalcUk();
+                return new OrderTotalUk();
             case "US":
-                return new CalcUs();
+                return new OrderTotalUs();
             default:
-                return new CalcWorld();
+                return new OrderTotalWorld();
         }
     }
 }
