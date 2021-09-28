@@ -16,14 +16,10 @@ class PremiumBox extends AdditionalCalc
         if($order->isPremiumBox() )
         {
             $price = 0;
-            switch($shipping_cost->getCurrencyCode())
-            {
-                case "PLN" : $price = 40; break;//PLN;
-                case "GBP": $price = 20; break; //GBP
-                case "$": $price = 17; break;//US $
-                default: 17; break; // US $ for the rest of the world
-            }
-            $price_summary = $shipping_cost->getValue() + $price;
+            ///get price box per country
+            $price_per_country = (new PriceBoxFactory())->create($shipping_cost->getCurrencyCode());
+
+            $price_summary = $shipping_cost->getValue() + $price_per_country->getValue();
             $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $price_summary);
         }
 
