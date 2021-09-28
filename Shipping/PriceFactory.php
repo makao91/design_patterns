@@ -1,5 +1,5 @@
 <?php
-namespace App\Shipping\Price;
+namespace App\Shipping;
 
 use App\Contracts\IPrice;
 use App\Shipping\Countries\OtherCountries\PriceWorld;

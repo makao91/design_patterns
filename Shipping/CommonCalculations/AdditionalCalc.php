@@ -6,7 +6,7 @@ use \App\Contracts\ICountryShippingCalc;
 
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
-use App\Shipping\Price\PriceFactory;
+use App\Shipping\PriceFactory;
 
 abstract class AdditionalCalc implements ICountryShippingCalc
 {
