@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Shipping\AdditionalCalculations;
+namespace App\Shipping\AdditionalCalculations\BoxPricing;
 
 
 use App\Contracts\ICountryShippingCalc;

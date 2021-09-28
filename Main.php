@@ -29,10 +29,7 @@ class Main
 
     private function makeShippingCalcultions(IShippingOrder $order_adapter):IPrice
     {
-        $calc_factory = new CountryCalcFactory();
-        $country_calculator = $calc_factory->create($order_adapter->getCountry());
-
         $calculator_facade = new ShippingCostCalculator();
-        return $calculator_facade->calculate($country_calculator, $order_adapter);
+        return $calculator_facade->calculate($order_adapter);
     }
 }

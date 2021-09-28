@@ -1,11 +1,13 @@
 <?php
 
 
-namespace App\Shipping\AdditionalCalculations;
+namespace App\Shipping\AdditionalCalculations\BoxPricing;
 
 use \App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
+use App\Shipping\AdditionalCalculations\AdditionalCalc;
+use App\Shipping\AdditionalCalculations\BoxPricing\PriceBoxFactory;
 use App\Shipping\Price\PriceFactory;
 
 class PremiumBox extends AdditionalCalc
