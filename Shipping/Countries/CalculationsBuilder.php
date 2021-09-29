@@ -9,24 +9,38 @@ use App\Shipping\CommonCalculations\ClientShippingDiscount;
 use App\Shipping\CommonCalculations\FreeDeliveryDays;
 
 
-abstract class CalculationsBuilder implements ICalculationsBuilder
+
+class CalculationsBuilder implements ICalculationsBuilder
 {
     protected IShippingOrder $order;
+    protected ICountryShippingCalc $order_total;
+    protected ICountryShippingCalc $box_pricing;
 
-    public function __construct(IShippingOrder $order)
+    public function __construct(IShippingOrder $order, ICountryShippingCalc $box_pricing, ICountryShippingCalc $order_total)
     {
         $this->order = $order;
+        $this->order_total = $order_total;
+        $this->box_pricing = $box_pricing;
     }
 
     public function useShippingDiscounts(IPrice $price): IPrice
     {
-        $with_free_days = (new FreeDeliveryDays($price))->calculate($this->order);
-        return (new ClientShippingDiscount($with_free_days))->calculate($this->order);
+        $free_days_decorator = (new FreeDeliveryDays($price))->calculate($this->order);
+        return (new ClientShippingDiscount($free_days_decorator))->calculate($this->order);
     }
 
-    abstract public function useOrderTotal():IPrice;
+    public function useOrderTotal():IPrice
+    {
+        return $this->order_total->calculate($this->order);
+    }
 
-    abstract public function useBoxPricing(IPrice $price):IPrice;
+    public function useBoxPricing(IPrice $price):IPrice
+    {
+        $box_pricing_class = get_class($this->box_pricing);
+        $premium_box_decorator = new $box_pricing_class($price);
+
+        return $premium_box_decorator->calculate($this->order);
+    }
 
 
 }
