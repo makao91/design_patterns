@@ -4,15 +4,14 @@ namespace App;
 use App\Contracts\IShippingOrder;
 use App\Orders\Order;
 use App\Orders\ShippingOrderAdapter;
-use App\Shipping\CountryCalculators\CountryCalcFactory;
 use App\Shipping\ShippingCostCalculator;
 use App\Contracts\IPrice;
 
 class Main
 {
-    public function start($country_code, $total, $discount = 0, $box_type = 'DEFAULT')
+    public function start(array $order)
     {
-        $order_adapter = $this->getWrappedOrder($country_code, $total, $discount, $box_type);
+        $order_adapter = $this->getWrappedOrder($order);
         $shipping_cost = $this->makeShippingCalcultions($order_adapter);
 
         return $shipping_cost->getFomatedValue();
@@ -21,9 +20,9 @@ class Main
     /**
      * we want to be independent as much as possible from the original messed Order object
      */
-    private function getWrappedOrder($country_code, $total, $discount = 0, $premium_box = false):IShippingOrder
+    private function getWrappedOrder($order):IShippingOrder
     {
-        $immutable_order = new Order($country_code, $total, $discount, $premium_box);
+        $immutable_order = new Order($order);
 
         return new ShippingOrderAdapter($immutable_order);
     }
