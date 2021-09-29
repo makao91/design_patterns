@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Shipping\AdditionalCalculations\BoxPricing;
+namespace App\Shipping\CommonCalculations\BoxPricing;
 
 
 use App\Contracts\IPrice;

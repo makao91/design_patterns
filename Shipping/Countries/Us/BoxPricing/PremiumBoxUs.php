@@ -3,7 +3,7 @@
 
 namespace App\Shipping\Countries\Us\BoxPricing;
 
-use App\Shipping\AdditionalCalculations\BoxPricing\PremiumBox;
+use App\Shipping\CommonCalculations\BoxPricing\PremiumBox;
 
 class PremiumBoxUs extends PremiumBox
 {
