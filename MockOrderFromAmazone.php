@@ -2,12 +2,13 @@
 
 namespace App;
 
-class OrderClientOne
+class OrderFromAmazone
 {
     public static function getOrder()
     {
         return [
             'data' => [
+                "client" => 'amazone',
                 'country' => "PL",
                 'total' => 50,
                 'shipping_discount_pl' => 0,

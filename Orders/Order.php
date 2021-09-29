@@ -1,6 +1,7 @@
 <?php
 namespace App\Orders;
 
+
 /**
  * This is a dummy class, which only imitate the real class
  * In reality there will be much more code inside of it, and for each country
@@ -9,6 +10,7 @@ namespace App\Orders;
  * In this tutorial we don't care about this class.
  * Let say it is a shity library and you can't change it
  * Class Order
+ *
  * @package App\Orders
  */
 class Order
@@ -20,14 +22,13 @@ class Order
     private $shipping_discount_uk;
     private $shipping_discount_us;
 
-    public function __construct($order_mock)
+    public function __construct(array $order_mock)
     {
-        $this->country = $order_mock['data']['country'];
-        $this->total = $order_mock['data']['total'];
-        $this->shipping_discount_pl = $order_mock['data']['shipping_discount_pl'];
-        $this->shipping_discount_uk = $order_mock['data']['shipping_discount_uk'];
-        $this->shipping_discount_us = $order_mock['data']['shipping_discount_us'];
-        $this->box_type = $order_mock['data']['box_type'];
+        if ($order_mock['data']['client'] === OrderClients::GOOGLE){
+            $adapter = new GoogleOrderAdapter();
+            $order_mock = $adapter->adapt($order_mock);
+        }
+        $this->initOrder($order_mock['data']);
     }
 
     public function getCountry()
@@ -71,4 +72,16 @@ class Order
     }
     //please assume that there will be a lot more of code inside of this class
     //imagine the worst code which you ever seen... this one is worse
+    /**
+     * @param $data
+     */
+    public function initOrder($data): void
+    {
+        $this->country = $data['country'];
+        $this->total = $data['total'];
+        $this->shipping_discount_pl = $data['shipping_discount_pl'];
+        $this->shipping_discount_uk = $data['shipping_discount_uk'];
+        $this->shipping_discount_us = $data['shipping_discount_us'];
+        $this->box_type = $data['box_type'];
+    }
 }
