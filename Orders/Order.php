@@ -13,17 +13,21 @@ namespace App\Orders;
  */
 class Order
 {
-    private $country = "PL";
-    private $total = 50;
-    private $shipping_discount = 0;
-    private $box_type = "DEFAULT";
+    private $country;
+    private $total;
+    private $shipping_discount_pl;
+    private $box_type;
+    private $shipping_discount_uk;
+    private $shipping_discount_us;
 
-    public function __construct($country_code, $total, $shipping_discount, $box_type)
+    public function __construct($order_mock)
     {
-        $this->country = $country_code;
-        $this->total = $total;
-        $this->shipping_discount = $shipping_discount;
-        $this->box_type = $box_type;
+        $this->country = $order_mock['data']['country'];
+        $this->total = $order_mock['data']['total'];
+        $this->shipping_discount_pl = $order_mock['data']['shipping_discount_pl'];
+        $this->shipping_discount_uk = $order_mock['data']['shipping_discount_uk'];
+        $this->shipping_discount_us = $order_mock['data']['shipping_discount_us'];
+        $this->box_type = $order_mock['data']['box_type'];
     }
 
     public function getCountry()
@@ -46,23 +50,19 @@ class Order
         return $this->total;
     }
 
-    public function getClientDiscount(){
-        return 10;
-    }
-
     public function getClientShippingDiscountPL()
     {
-        return $this->shipping_discount;
+        return $this->shipping_discount_pl;
     }
 
-    public function getClientShippingDiscountEU()
+    public function getClientShippingDiscountUk()
     {
-        return 20;
+        return $this->shipping_discount_uk;
     }
 
     public function getClientShippingDiscountWORLD()
     {
-        return 0;
+        return $this->shipping_discount_us;
     }
 
     public function boxType()

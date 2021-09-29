@@ -46,7 +46,7 @@ class ShippingOrderAdapter implements IShippingOrder
            case "PL":
                return $this->order->getClientShippingDiscountPL();
            case "UK":
-               return $this->order->getClientShippingDiscountEU();
+               return $this->order->getClientShippingDiscountUk();
            case "US":
                return $this->order->getClientShippingDiscountWORLD();
            default:
