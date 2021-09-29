@@ -37,8 +37,8 @@ class CalculationsBuilder implements ICalculationsBuilder
     public function useBoxPricing(IPrice $price):IPrice
     {
         $box_pricing_class = get_class($this->box_pricing);
-        $premium_box_decorator = new $box_pricing_class($price);
 
+        $premium_box_decorator = new $box_pricing_class($price);
         return $premium_box_decorator->calculate($this->order);
     }
 
