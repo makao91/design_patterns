@@ -43,7 +43,7 @@ class MainTest extends TestCase
     public function start_needToPayPLDiscountANDPremiumBox()
     {
         $main  = new Main();
-        $result = $main->start("PL", 50, 10, true);
+        $result = $main->start("PL", 50, 10, 'PREMIUM_BOX');
 
         $this->assertEquals('55PLN', $result);
     }
@@ -74,6 +74,20 @@ class MainTest extends TestCase
         $result = $main->start("UK", 450);
 
         $this->assertEquals('0GBP', $result);
+    }
+
+    /**
+     * @feature Orders
+     * @sceanrio Calculate Shipping Cost
+     * @case to England free delivery above order total
+     * @test
+     */
+    public function start_freeShippingUK_championsBox()
+    {
+        $main  = new Main();
+        $result = $main->start("UK", 450, 0, 'UEFA_CHAMPION');
+
+        $this->assertEquals('40GBP', $result);
     }
 
     /**

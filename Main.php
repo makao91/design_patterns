@@ -10,9 +10,9 @@ use App\Contracts\IPrice;
 
 class Main
 {
-    public function start($country_code, $total, $discount = 0, $premium_box = false)
+    public function start($country_code, $total, $discount = 0, $box_type = 'DEFAULT')
     {
-        $order_adapter = $this->getWrappedOrder($country_code, $total, $discount, $premium_box);
+        $order_adapter = $this->getWrappedOrder($country_code, $total, $discount, $box_type);
         $shipping_cost = $this->makeShippingCalcultions($order_adapter);
 
         return $shipping_cost->getFomatedValue();

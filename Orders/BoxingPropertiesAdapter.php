@@ -15,8 +15,10 @@ class BoxingPropertiesAdapter implements IShippingBox
         $this->order = $order;
     }
 
-    public function isPremiumBox():bool
+     public function getType(): string
     {
-        return $this->order->isPremiumBox();
+        //remember we are working with dummy data
+        //probably in real situtation you will get the type from database using the order_id
+        return $this->order->boxType();
     }
 }

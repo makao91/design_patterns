@@ -1,20 +1,19 @@
 <?php
 
 
-namespace App\Shipping\Countries\OtherCountries\BoxPricing;
+namespace App\Shipping\Countries\Uk\BoxPricing;
 
 use App\Shipping\CommonCalculations\BoxPricing\PremiumBox;
 
-
-class PremiumBoxWorld extends PremiumBox
+class UefaChampionBox extends PremiumBox
 {
     protected function getCurrentType()
     {
-        return "PREMIUM_BOX";
+        return "UEFA_CHAMPION";
     }
 
     protected function getCountryPrice()
     {
-        return 17;
+        return 40;
     }
 }

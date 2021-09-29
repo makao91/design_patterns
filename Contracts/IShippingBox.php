@@ -6,5 +6,5 @@ namespace App\Contracts;
 
 interface IShippingBox
 {
-    public function isPremiumBox():bool;
+    public function getType():string;
 }

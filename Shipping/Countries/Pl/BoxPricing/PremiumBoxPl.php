@@ -7,6 +7,13 @@ use App\Shipping\CommonCalculations\BoxPricing\PremiumBox;
 
 class PremiumBoxPl extends PremiumBox
 {
-    protected $country_price = 40;
+    protected function getCurrentType()
+    {
+        return "PREMIUM_BOX";
+    }
 
+    protected function getCountryPrice()
+    {
+        return 40;
+    }
 }

@@ -16,14 +16,14 @@ class Order
     private $country = "PL";
     private $total = 50;
     private $shipping_discount = 0;
-    private $premium_box = false;
+    private $box_type = "DEFAULT";
 
-    public function __construct($country_code, $total, $shipping_discount, $premium_box)
+    public function __construct($country_code, $total, $shipping_discount, $box_type)
     {
         $this->country = $country_code;
         $this->total = $total;
         $this->shipping_discount = $shipping_discount;
-        $this->premium_box = $premium_box;
+        $this->box_type = $box_type;
     }
 
     public function getCountry()
@@ -65,9 +65,9 @@ class Order
         return 0;
     }
 
-    public function isPremiumBox()
+    public function boxType()
     {
-        return $this->premium_box;
+        return $this->box_type;
     }
     //please assume that there will be a lot more of code inside of this class
     //imagine the worst code which you ever seen... this one is worse

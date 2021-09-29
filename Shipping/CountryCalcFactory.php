@@ -7,15 +7,19 @@ use App\Contracts\ICalculationsBuilder;
 use App\Contracts\IShippingOrder;
 use App\Shipping\Countries\CalculationsBuilder;
 use App\Shipping\Countries\OtherCountries\BoxPricing\PremiumBoxWorld;
+use App\Shipping\Countries\OtherCountries\CalculationsBuilderWorld;
 use App\Shipping\Countries\OtherCountries\OrderTotalWorld;
 use App\Shipping\Countries\OtherCountries\PriceWorld;
 use App\Shipping\Countries\Pl\BoxPricing\PremiumBoxPl;
+use App\Shipping\Countries\Pl\CalculationsBuilderPl;
 use App\Shipping\Countries\Pl\OrderTotalPl;
 use App\Shipping\Countries\Pl\PricePl;
 use App\Shipping\Countries\Uk\BoxPricing\PremiumBoxUk;
+use App\Shipping\Countries\Uk\CalculationsBuilderUk;
 use App\Shipping\Countries\Uk\OrderTotalUk;
 use App\Shipping\Countries\Uk\PriceUk;
 use App\Shipping\Countries\Us\BoxPricing\PremiumBoxUs;
+use App\Shipping\Countries\Us\CalculationsBuilderUs;
 use App\Shipping\Countries\Us\OrderTotalUs;
 use App\Shipping\Countries\Us\PriceUs;
 
@@ -28,31 +32,22 @@ class CountryCalcFactory
         switch ($order->getCountry())
         {
             case "PL":
-                $price = new PricePl(0);
-                $premium_box = new PremiumBoxPl($price);
                 $order_total = new OrderTotalPl();
-                break;
+                return new CalculationsBuilderPl($order, $order_total);
 
             case "UK":
-                $price = new PriceUk(0);
-                $premium_box = new PremiumBoxUk($price);
                 $order_total = new OrderTotalUk();
-                break;
+                return new CalculationsBuilderUk($order, $order_total);
 
             case "US":
-                $price = new PriceUs(0);
-                $premium_box = new PremiumBoxUs($price);
                 $order_total = new OrderTotalUs();
-                break;
+                return new CalculationsBuilderUs($order, $order_total);
 
             default:
-                $price = new PriceWorld(0);
-                $premium_box = new PremiumBoxWorld($price);
+
                 $order_total = new OrderTotalWorld();
-                break;
+                return new CalculationsBuilderWorld($order, $order_total);
 
         }
-
-        return new CalculationsBuilder($order, $premium_box, $order_total);
     }
 }
