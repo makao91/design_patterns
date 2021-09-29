@@ -31,16 +31,30 @@ class CountryCalcFactory
         {
             case "PL":
                 $price = new PricePl(0);
-                return new CalculationsBuilder($order, new PremiumBoxPl($price), new OrderTotalPl());
+                $premium_box = new PremiumBoxPl($price);
+                $order_total = new OrderTotalPl();
+                break;
+
             case "UK":
                 $price = new PriceUk(0);
-                return new CalculationsBuilder($order, new PremiumBoxUk($price), new OrderTotalUk());
+                $premium_box = new PremiumBoxUk($price);
+                $order_total = new OrderTotalUk();
+                break;
+
             case "US":
                 $price = new PriceUs(0);
-                return new CalculationsBuilder($order, new PremiumBoxUs($price), new OrderTotalUs());
+                $premium_box = new PremiumBoxUs($price);
+                $order_total = new OrderTotalUs();
+                break;
+
             default:
                 $price = new PriceWorld(0);
-                return new CalculationsBuilder($order, new PremiumBoxWorld($price), new OrderTotalWorld());
+                $premium_box = new PremiumBoxWorld($price);
+                $order_total = new OrderTotalWorld();
+                break;
+
         }
+
+        return new CalculationsBuilder($order, $premium_box, $order_total);
     }
 }
