@@ -4,16 +4,19 @@
 namespace App\Orders;
 
 
+use App\Contracts\IShippingBox;
 use App\Contracts\IShippingClient;
 use App\Contracts\IShippingOrder;
 
 class ShippingOrderAdapter implements IShippingOrder
 {
     private Order $order;
+    private IShippingBox $boxing;
 
     public function __construct($order)
     {
         $this->order = $order;
+        $this->boxing = new BoxingPropertiesAdapter($order);
     }
 
     public function getCountry()
@@ -51,8 +54,8 @@ class ShippingOrderAdapter implements IShippingOrder
        }
     }
 
-    public function isPremiumBox():bool
+    public function getBoxingProperties(): IShippingBox
     {
-        return $this->order->isPremiumBox();
+        return $this->boxing;
     }
 }

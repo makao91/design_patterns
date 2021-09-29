@@ -3,23 +3,9 @@
 
 namespace App\Shipping\Countries\Uk\BoxPricing;
 
+use App\Shipping\AdditionalCalculations\BoxPricing\PremiumBox;
 
-use App\Contracts\IPrice;
-use App\Contracts\IShippingOrder;
-use App\Shipping\CommonCalculations\AdditionalCalc;
-
-class PremiumBoxUk extends AdditionalCalc
+class PremiumBoxUk extends PremiumBox
 {
     protected $country_price = 20;
-
-    protected function decorate(IPrice $shipping_cost, IShippingOrder $order):IPrice
-    {
-        if($order->isPremiumBox() )
-        {
-            $price_summary = $shipping_cost->getValue() + $this->country_price;
-            $shipping_cost = $this->price_factory->create($shipping_cost->getCurrencyCode(), $price_summary);
-        }
-
-        return $shipping_cost;
-    }
 }
