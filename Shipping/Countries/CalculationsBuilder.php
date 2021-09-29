@@ -21,14 +21,21 @@ abstract class CalculationsBuilder implements ICalculationsBuilder
         $this->order_total = $order_total;
     }
 
-    public function useShippingDiscounts(IPrice $price): IPrice
+    public function useShippingDiscounts(ICountryShippingCalc $calculations_component):ICountryShippingCalc
     {
-        $free_days = (new FreeDeliveryDays($price))->calculate($this->order);
-        return (new ClientShippingDiscount($free_days))->calculate($this->order);
+        $free_days_decorator = new FreeDeliveryDays($calculations_component);
+        $client_discount_decorator =  new ClientShippingDiscount($free_days_decorator);
+
+        return $client_discount_decorator;
     }
 
-    public function useOrderTotal():IPrice
+    public function useOrderTotal():ICountryShippingCalc
     {
-        return $this->order_total->calculate($this->order);
+        return $this->order_total;
+    }
+
+    public function makeCalculations(ICountryShippingCalc $calculations_component): IPrice
+    {
+        return $calculations_component->calculate($this->order);
     }
 }
