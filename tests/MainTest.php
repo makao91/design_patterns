@@ -2,7 +2,7 @@
 namespace App\Tests;
 
 use App\OrderClientOne;
-use OrderClients;
+use App\Orders\OrderClients;
 use PHPUnit\Framework\TestCase;
 use App\Main;
 
@@ -220,13 +220,13 @@ class MainTest extends TestCase
     {
         $main  = new Main();
         $order_mock = [
-            'data' => [
-                "client" => 'google',
-                'europe_country' => "england",
-                'total_order_price' => 2450,
-                'discount_to_poland' => 0,
-                'discount_to_england' => 0,
-            ]
+                'data' => [
+                    "client" => 'google',
+                    'europe_country' => "england",
+                    'total_order_price' => 2450,
+                    'discount_to_poland' => 0,
+                    'discount_to_england' => 0,
+                ]
         ];
         $result = $main->start($order_mock);
 
