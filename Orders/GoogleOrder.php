@@ -1,8 +1,6 @@
 <?php
 namespace App\Orders;
 
-use phpDocumentor\Reflection\Types\This;
-
 class GoogleOrder extends Order implements IOrder
 {
     const POLSKA = 'polska';
@@ -20,12 +18,12 @@ class GoogleOrder extends Order implements IOrder
 
     public function getTotalUk(): float
     {
-        return $this->data['total'];
+        return $this->data['total_order_price'];
     }
 
     public function getTotalUs(): float
     {
-        return $this->data['total'];
+        return $this->data['total_order_price'];
     }
 
     public function getClientShippingDiscountPL(): float

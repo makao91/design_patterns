@@ -5,7 +5,6 @@ namespace App\Orders;
 
 
 use App\Contracts\IShippingBox;
-use App\Contracts\IShippingClient;
 use App\Contracts\IShippingOrder;
 
 class ShippingOrderAdapter implements IShippingOrder

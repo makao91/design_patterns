@@ -1,7 +1,6 @@
 <?php
 namespace App\Shipping;
 
-use App\Contracts\ICountryShippingCalc;
 use App\Contracts\IPrice;
 use App\Contracts\IShippingOrder;
 
