@@ -14,6 +14,7 @@ use App\Payments\Gateways\Paypal;
 use App\Payments\Gateways\Przelewy24;
 use App\Payments\Gateways\Tpay;
 use App\Payments\Gateways\UPay;
+use Exception;
 
 class PaymentGatewayFactory
 {
